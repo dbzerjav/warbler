@@ -1,3 +1,2 @@
-/warbler-server/node_modules
-/warbler-server/*.env
-/warbler-client/node_modules
+node_modules
+*.env
