@@ -6,7 +6,7 @@ import Logo from "../images/warbler-logo.png";
 class Navbar extends Component {
   render() {
     return(
-      <nav class='navbar navbar-expand'>
+      <nav className='navbar navbar-expand'>
         <div className='container-fluid'>
           <div className='navbar-header'>
             <Link to='/' className='navbar-brand'>
