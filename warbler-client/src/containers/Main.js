@@ -4,22 +4,31 @@ import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
 import { authUser } from '../store/actions/auth';
+import { removeError } from '../store/actions/errors';
+import withAuth from '../hocs/withAuth';
+import MessageForm from '../containers/MessageForm';
 
 const Main = props => {
-  const { authUser } = props;
-  return(
+  const { authUser, errors, removeError, currentUser } = props;
+  return (
     <div className="container">
       <Switch>
-        <Route exact path='/' render={props => <Homepage {...props} />} />
         <Route
           exact
-          path='/signin'
+          path="/"
+          render={props => <Homepage currentUser={currentUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/signin"
           render={props => {
-            return(
+            return (
               <AuthForm
+                removeError={removeError}
+                errors={errors}
                 onAuth={authUser}
-                buttonText='Log in'
-                heading="Welcome back."
+                buttonText="Log in"
+                heading="Welcome Back."
                 {...props}
               />
             );
@@ -27,19 +36,25 @@ const Main = props => {
         />
         <Route
           exact
-          path='/signup'
+          path="/signup"
           render={props => {
-            return(
+            return (
               <AuthForm
-              onAuth={authUser}
+                removeError={removeError}
+                errors={errors}
+                onAuth={authUser}
                 signUp
-                buttonText='Sign up'
+                buttonText="Sign me up!"
                 heading="Join Warbler today."
                 {...props}
               />
             );
           }}
         />
+      <Route 
+      	path='/users/:id/messages/new' 
+      	component={MessageForm} 
+      	/>
       </Switch>
     </div>
   );
@@ -47,8 +62,11 @@ const Main = props => {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
-  }
+    currentUser: state.currentUser,
+    errors: state.errors
+  };
 }
 
-export default withRouter(connect(mapStateToProps, { authUser })(Main));
+export default withRouter(
+  connect(mapStateToProps, { authUser, removeError })(Main)
+);

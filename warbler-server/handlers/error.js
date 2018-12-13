@@ -3,6 +3,6 @@ function errorHandler(error, request, response, next) {
     error: {
       message: error.message || 'Oops! Something went wrong.'
     }
-  })
+  });
 }
 module.exports = errorHandler;

@@ -18,7 +18,7 @@ code {
   color: white;
 }
 
-.navbar a:hover {
+.navbar button:hover {
   color: white;
   text-decoration: underline;
   cursor: pointer;
@@ -63,3 +63,40 @@ ul.nav.navbar-nav li {
    color: #fff;
    text-shadow: 0 0 8px #66757f;
  }
+
+ #logout-button {
+  background:none!important;
+  color: white;
+  font-weight: bold;
+  border:none;
+  padding:0!important;
+  cursor: pointer;
+ }
+
+/* Messages */
+
+#messages .list-group-itme {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 20px 12px;
+}
+
+#messages:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ecf0;
+}
+
+.timeline-image {
+  border-radius: 50px;
+  height: 48px;
+  width: 48px;
+  margin: 2px 30px 10px 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+button.btn.btn-danger,
+button.btn.btn-danger:hover {
+  color: white;
+}

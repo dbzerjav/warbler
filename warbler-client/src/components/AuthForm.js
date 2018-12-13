@@ -21,33 +21,55 @@ export default class AuthForm extends Component {
     e.preventDefault();
     const authType = this.props.signUp ? 'signup' : 'signin';
     this.props.onAuth(authType, this.state).then(() => {
-      console.log('Logged in');
+      this.props.history.push('/');
+    }).catch(() => {
+      return;
     });
   }
 
   render() {
-    const { email, username, profileImageUrl } = this.state;
-    const { heading, buttonText, signUp } = this.props;
+    const { email,
+      username,
+      profileImageUrl
+    } = this.state;
+    const {
+      heading,
+      buttonText,
+      signUp,
+      errors,
+      history,
+      removeError
+    } = this.props;
+
+  history.listen(() => {
+    removeError();
+  });
+
     return (
       <div>
         <div className='row justify-content-md-center text-center'>
           <div className='col-md-6'>
             <form onSubmit={this.handleSubmit}>
               <h2>{heading}</h2>
+              {errors.message && (
+                <div className='alert alert-danger'>{errors.message}</div>
+              )}
               <label htmlFor='email'>Email:</label>
               <input
-                className='form-control'
-                id='email'
-                name='email'
+                autoComplete="off"
+                className="form-control"
+                id="email"
+                name="email"
                 onChange={this.handleChange}
-                value={email}
                 type='text'
+                value={email}
               />
               <label htmlFor='password'>Password:</label>
               <input
-                className='form-control'
-                id='password'
-                name='password'
+                autoComplete="off"
+                className="form-control"
+                id="password"
+                name="password"
                 onChange={this.handleChange}
                 type='password'
               />
@@ -55,21 +77,23 @@ export default class AuthForm extends Component {
                 <div>
                   <label htmlFor='username'>Username:</label>
                   <input
-                    className='form-control'
-                    id='username'
-                    name='username'
+                    autoComplete="off"
+                    className="form-control"
+                    id="username"
+                    name="username"
                     onChange={this.handleChange}
+                    type='text'
                     value={username}
-                    type='text'
                   />
-                  <label htmlFor='profile-image-url'>Image URL:</label>
+                  <label htmlFor='image-url'>Image URL:</label>
                   <input
-                    className='form-control'
-                    id='profile-image-url'
-                    name='profile-image-url'
+                    autoComplete="off"
+                    className="form-control"
+                    id="image-url"
+                    name="profileImageUrl"
                     onChange={this.handleChange}
-                    value={profileImageUrl}
                     type='text'
+                    value={profileImageUrl}
                   />
                 </div>
               )}
